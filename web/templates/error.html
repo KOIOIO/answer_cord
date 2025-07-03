@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>错误页面</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --background-color: #ecf0f1;
+            --card-color: #fff;
+            --text-color: #2c3e50;
+            --error-color: #e74c3c;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 100%);
+            color: var(--text-color);
+            animation: fadeIn 0.5s ease-in, backgroundShift 10s infinite alternate;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes backgroundShift {
+            from { background-position: 0% 0%; }
+            to { background-position: 100% 100%; }
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--error-color);
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .error-box {
+            background-color: var(--card-color);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .error-box::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg at 50% 50%, rgba(231, 76, 60, 0.2) 0deg, transparent 90deg);
+            animation: rotate 10s linear infinite;
+            z-index: 0;
+        }
+
+        .error-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        p {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        a {
+            display: block;
+            width: fit-content;
+            margin: 2rem auto 0;
+            background-color: var(--secondary-color);
+            color: #fff;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        a::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        a:hover {
+            background-color: #2980b9;
+            transform: scale(1.02);
+        }
+
+        a:hover::before {
+            left: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>发生错误</h1>
+    <div class="error-box">
+        <div class="error-content">
+            <p>{{ error }}</p>
+        </div>
+    </div>
+    <a href="{{ url_for('index') }}">返回上传页面</a>
+</body>
+</html>
